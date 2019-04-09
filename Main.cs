@@ -10,8 +10,8 @@ namespace DynamicProxy
 		static void Main( string[] args ) {
             Action dec = ()=>Console.WriteLine("bbbbbb");
 
-            IMyClass myClass = new MyClass(Console.WriteLine);
-            IMyClass myDecClass = BeforeDecorator.GetDecoratedProxy<IMyClass>( myClass, dec );
+            MyClass myClass = new MyClass(Console.WriteLine);
+            var myDecClass = BeforeDecorator.GetDecoratedProxy<IMyClass>( myClass, dec );
             
             myClass.Func1();
             myClass.Func2( 1, "2" );
