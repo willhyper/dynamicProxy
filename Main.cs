@@ -10,7 +10,7 @@ namespace DynamicProxy
 		static void Main( string[] args ) {
             Action dec = ()=>Console.WriteLine("bbbbbb");
 
-            IMyClass myClass = new MyClass();
+            IMyClass myClass = new MyClass(Console.WriteLine);
             IMyClass myDecClass = (IMyClass) BeforeDecorator.GetDecoratedProxy( myClass, dec );
             
             myClass.Func1();
@@ -29,13 +29,18 @@ namespace DynamicProxy
 
     public class MyClass : IMyClass {
 
+        private Action<string> _action;
+        public MyClass(Action<string> action)
+        {
+            _action = action;
+        }
         public void Func1() {
-            Console.WriteLine( nameof(Func1) );
+            _action( nameof(Func1) );
         }
 
         public object Func2( object a, object b ) {
 
-            Console.WriteLine( nameof(Func2) );
+            _action( nameof(Func2) );
             return null;
         }
     }
