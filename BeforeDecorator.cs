@@ -5,28 +5,28 @@ namespace DynamicProxy
     
 	public class BeforeDecorator : IProxyInvocationHandler
 	{
-        private Object clz;
+        private object clz;
         private Action decorator;
 
-        private BeforeDecorator(Object cls, Action decorator) {
+        private BeforeDecorator(object cls, Action decorator) {
             this.clz = cls;
             this.decorator = decorator;
         }
 
-        public static Object GetDecoratedProxy(Object cls, Action decorator)
+        public static object GetDecoratedProxy(object cls, Action decorator)
         {
             BeforeDecorator dec = new BeforeDecorator(cls, decorator);
             return ProxyFactory.Create(dec, cls.GetType());
         }
         
 
-        public Object Invoke(Object proxy, System.Reflection.MethodInfo method, Object[] parameters) {
+        public object Invoke(object proxy, System.Reflection.MethodInfo method, object[] parameters) {
 
             // decorator logic
             decorator();
 
             // The actual method is invoked
-            Object retVal = method.Invoke( clz, parameters );
+            object retVal = method.Invoke( clz, parameters );
                         
             return retVal;
         }

@@ -13,6 +13,6 @@ namespace DynamicProxy
         /// <param name="method">The method info that can be used to invoke the actual method on the object implementation</param>
         /// <param name="parameters">Parameters to pass to the method</param>
         /// <returns>Object</returns>
-        Object Invoke( Object proxy, MethodInfo method, Object[] parameters );
+        object Invoke( object proxy, MethodInfo method, object[] parameters );
 	}
 }

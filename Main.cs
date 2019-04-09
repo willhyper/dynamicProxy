@@ -2,8 +2,8 @@ using System;
 
 namespace DynamicProxy
 {
-    
-	public class MainClass
+
+    public class MainClass
 	{
         
 		//[STAThread]
@@ -13,28 +13,29 @@ namespace DynamicProxy
             IMyClass myClass = new MyClass();
             IMyClass myDecClass = (IMyClass) BeforeDecorator.GetDecoratedProxy( myClass, dec );
             
-            myClass.TestFunctionOne();
-            myClass.TestFunctionTwo( 1, "2" );
+            myClass.Func1();
+            myClass.Func2( 1, "2" );
 
-            myDecClass.TestFunctionOne();
-            myDecClass.TestFunctionTwo(3,"4");
+            myDecClass.Func1();
+            myDecClass.Func2(3,"4");
 		}
 	}
 
     public interface IMyClass 
     {
-        void TestFunctionOne();
-        Object TestFunctionTwo( Object a, Object b );
+        void Func1();
+        object Func2( object a, object b );
     }
 
     public class MyClass : IMyClass {
-        public void TestFunctionOne() {
-            Console.WriteLine( "In TestImpl.TestFunctionOne()" );
+
+        public void Func1() {
+            Console.WriteLine( nameof(Func1) );
         }
 
-        public Object TestFunctionTwo( Object a, Object b ) {
+        public object Func2( object a, object b ) {
 
-            Console.WriteLine( $"In TestImpl.TestFunctionTwo( {a},{b} )" );
+            Console.WriteLine( nameof(Func2) );
             return null;
         }
     }
