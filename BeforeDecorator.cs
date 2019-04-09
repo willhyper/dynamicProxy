@@ -13,10 +13,10 @@ namespace DynamicProxy
             this.decorator = decorator;
         }
 
-        public static object GetDecoratedProxy(object cls, Action decorator)
+        public static T GetDecoratedProxy<T>(object cls, Action decorator)
         {
             BeforeDecorator dec = new BeforeDecorator(cls, decorator);
-            return ProxyFactory.Create(dec, cls.GetType());
+            return (T) ProxyFactory.Create(dec, cls.GetType());
         }
         
 
